@@ -153,83 +153,116 @@ pub type wchar_t = ::std::os::raw::c_int;
 pub type max_align_t = f64;
 pub type sixel_index_t = ::std::os::raw::c_uchar;
 pub type SIXELSTATUS = ::std::os::raw::c_int;
-pub const characterSize_CSIZE_7BIT: characterSize = 0;
-pub const characterSize_CSIZE_8BIT: characterSize = 1;
-pub type characterSize = ::std::os::raw::c_uint;
-pub const methodForLargest_LARGE_AUTO: methodForLargest = 0;
-pub const methodForLargest_LARGE_NORM: methodForLargest = 1;
-pub const methodForLargest_LARGE_LUM: methodForLargest = 2;
-pub type methodForLargest = ::std::os::raw::c_uint;
-pub const methodForRep_REP_AUTO: methodForRep = 0;
-pub const methodForRep_REP_CENTER_BOX: methodForRep = 1;
-pub const methodForRep_REP_AVERAGE_COLORS: methodForRep = 2;
-pub const methodForRep_REP_AVERAGE_PIXELS: methodForRep = 3;
-pub type methodForRep = ::std::os::raw::c_uint;
-pub const methodForDiffuse_DIFFUSE_AUTO: methodForDiffuse = 0;
-pub const methodForDiffuse_DIFFUSE_NONE: methodForDiffuse = 1;
-pub const methodForDiffuse_DIFFUSE_ATKINSON: methodForDiffuse = 2;
-pub const methodForDiffuse_DIFFUSE_FS: methodForDiffuse = 3;
-pub const methodForDiffuse_DIFFUSE_JAJUNI: methodForDiffuse = 4;
-pub const methodForDiffuse_DIFFUSE_STUCKI: methodForDiffuse = 5;
-pub const methodForDiffuse_DIFFUSE_BURKES: methodForDiffuse = 6;
-pub const methodForDiffuse_DIFFUSE_A_DITHER: methodForDiffuse = 7;
-pub const methodForDiffuse_DIFFUSE_X_DITHER: methodForDiffuse = 8;
-pub type methodForDiffuse = ::std::os::raw::c_uint;
-pub const qualityMode_QUALITY_AUTO: qualityMode = 0;
-pub const qualityMode_QUALITY_HIGH: qualityMode = 1;
-pub const qualityMode_QUALITY_LOW: qualityMode = 2;
-pub const qualityMode_QUALITY_FULL: qualityMode = 3;
-pub const qualityMode_QUALITY_HIGHCOLOR: qualityMode = 4;
-pub type qualityMode = ::std::os::raw::c_uint;
-pub const builtinDither_BUILTIN_MONO_DARK: builtinDither = 0;
-pub const builtinDither_BUILTIN_MONO_LIGHT: builtinDither = 1;
-pub const builtinDither_BUILTIN_XTERM16: builtinDither = 2;
-pub const builtinDither_BUILTIN_XTERM256: builtinDither = 3;
-pub const builtinDither_BUILTIN_VT340_MONO: builtinDither = 4;
-pub const builtinDither_BUILTIN_VT340_COLOR: builtinDither = 5;
-pub type builtinDither = ::std::os::raw::c_uint;
-pub const formatType_FORMATTYPE_COLOR: formatType = 0;
-pub const formatType_FORMATTYPE_GRAYSCALE: formatType = 64;
-pub const formatType_FORMATTYPE_PALETTE: formatType = 128;
-pub type formatType = ::std::os::raw::c_uint;
-pub const pixelFormat_PIXELFORMAT_RGB555: pixelFormat = 1;
-pub const pixelFormat_PIXELFORMAT_RGB565: pixelFormat = 2;
-pub const pixelFormat_PIXELFORMAT_RGB888: pixelFormat = 3;
-pub const pixelFormat_PIXELFORMAT_BGR555: pixelFormat = 4;
-pub const pixelFormat_PIXELFORMAT_BGR565: pixelFormat = 5;
-pub const pixelFormat_PIXELFORMAT_BGR888: pixelFormat = 6;
-pub const pixelFormat_PIXELFORMAT_ARGB8888: pixelFormat = 16;
-pub const pixelFormat_PIXELFORMAT_RGBA8888: pixelFormat = 17;
-pub const pixelFormat_PIXELFORMAT_G1: pixelFormat = 64;
-pub const pixelFormat_PIXELFORMAT_G2: pixelFormat = 65;
-pub const pixelFormat_PIXELFORMAT_G4: pixelFormat = 66;
-pub const pixelFormat_PIXELFORMAT_G8: pixelFormat = 67;
-pub const pixelFormat_PIXELFORMAT_AG88: pixelFormat = 83;
-pub const pixelFormat_PIXELFORMAT_GA88: pixelFormat = 99;
-pub const pixelFormat_PIXELFORMAT_PAL1: pixelFormat = 128;
-pub const pixelFormat_PIXELFORMAT_PAL2: pixelFormat = 129;
-pub const pixelFormat_PIXELFORMAT_PAL4: pixelFormat = 130;
-pub const pixelFormat_PIXELFORMAT_PAL8: pixelFormat = 131;
-pub type pixelFormat = ::std::os::raw::c_uint;
-pub const paletteType_PALETTETYPE_AUTO: paletteType = 0;
-pub const paletteType_PALETTETYPE_HLS: paletteType = 1;
-pub const paletteType_PALETTETYPE_RGB: paletteType = 2;
-pub type paletteType = ::std::os::raw::c_uint;
-pub const encodePolicy_ENCODEPOLICY_AUTO: encodePolicy = 0;
-pub const encodePolicy_ENCODEPOLICY_FAST: encodePolicy = 1;
-pub const encodePolicy_ENCODEPOLICY_SIZE: encodePolicy = 2;
-pub type encodePolicy = ::std::os::raw::c_uint;
-pub const methodForResampling_RES_NEAREST: methodForResampling = 0;
-pub const methodForResampling_RES_GAUSSIAN: methodForResampling = 1;
-pub const methodForResampling_RES_HANNING: methodForResampling = 2;
-pub const methodForResampling_RES_HAMMING: methodForResampling = 3;
-pub const methodForResampling_RES_BILINEAR: methodForResampling = 4;
-pub const methodForResampling_RES_WELSH: methodForResampling = 5;
-pub const methodForResampling_RES_BICUBIC: methodForResampling = 6;
-pub const methodForResampling_RES_LANCZOS2: methodForResampling = 7;
-pub const methodForResampling_RES_LANCZOS3: methodForResampling = 8;
-pub const methodForResampling_RES_LANCZOS4: methodForResampling = 9;
-pub type methodForResampling = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum characterSize {
+    CSIZE_7BIT = 0,
+    CSIZE_8BIT = 1,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum methodForLargest {
+    LARGE_AUTO = 0,
+    LARGE_NORM = 1,
+    LARGE_LUM = 2,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum methodForRep {
+    REP_AUTO = 0,
+    REP_CENTER_BOX = 1,
+    REP_AVERAGE_COLORS = 2,
+    REP_AVERAGE_PIXELS = 3,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum methodForDiffuse {
+    DIFFUSE_AUTO = 0,
+    DIFFUSE_NONE = 1,
+    DIFFUSE_ATKINSON = 2,
+    DIFFUSE_FS = 3,
+    DIFFUSE_JAJUNI = 4,
+    DIFFUSE_STUCKI = 5,
+    DIFFUSE_BURKES = 6,
+    DIFFUSE_A_DITHER = 7,
+    DIFFUSE_X_DITHER = 8,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum qualityMode {
+    QUALITY_AUTO = 0,
+    QUALITY_HIGH = 1,
+    QUALITY_LOW = 2,
+    QUALITY_FULL = 3,
+    QUALITY_HIGHCOLOR = 4,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum builtinDither {
+    BUILTIN_MONO_DARK = 0,
+    BUILTIN_MONO_LIGHT = 1,
+    BUILTIN_XTERM16 = 2,
+    BUILTIN_XTERM256 = 3,
+    BUILTIN_VT340_MONO = 4,
+    BUILTIN_VT340_COLOR = 5,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum formatType {
+    FORMATTYPE_COLOR = 0,
+    FORMATTYPE_GRAYSCALE = 64,
+    FORMATTYPE_PALETTE = 128,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum pixelFormat {
+    PIXELFORMAT_RGB555 = 1,
+    PIXELFORMAT_RGB565 = 2,
+    PIXELFORMAT_RGB888 = 3,
+    PIXELFORMAT_BGR555 = 4,
+    PIXELFORMAT_BGR565 = 5,
+    PIXELFORMAT_BGR888 = 6,
+    PIXELFORMAT_ARGB8888 = 16,
+    PIXELFORMAT_RGBA8888 = 17,
+    PIXELFORMAT_G1 = 64,
+    PIXELFORMAT_G2 = 65,
+    PIXELFORMAT_G4 = 66,
+    PIXELFORMAT_G8 = 67,
+    PIXELFORMAT_AG88 = 83,
+    PIXELFORMAT_GA88 = 99,
+    PIXELFORMAT_PAL1 = 128,
+    PIXELFORMAT_PAL2 = 129,
+    PIXELFORMAT_PAL4 = 130,
+    PIXELFORMAT_PAL8 = 131,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum paletteType {
+    PALETTETYPE_AUTO = 0,
+    PALETTETYPE_HLS = 1,
+    PALETTETYPE_RGB = 2,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum encodePolicy {
+    ENCODEPOLICY_AUTO = 0,
+    ENCODEPOLICY_FAST = 1,
+    ENCODEPOLICY_SIZE = 2,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum methodForResampling {
+    RES_NEAREST = 0,
+    RES_GAUSSIAN = 1,
+    RES_HANNING = 2,
+    RES_HAMMING = 3,
+    RES_BILINEAR = 4,
+    RES_WELSH = 5,
+    RES_BICUBIC = 6,
+    RES_LANCZOS2 = 7,
+    RES_LANCZOS3 = 8,
+    RES_LANCZOS4 = 9,
+}
 pub type sixel_malloc_t =
     ::std::option::Option<unsafe extern "C" fn(arg1: usize) -> *mut ::std::os::raw::c_void>;
 pub type sixel_calloc_t = ::std::option::Option<
@@ -531,23 +564,29 @@ extern "C" {
         allocator: *mut sixel_allocator_t,
     ) -> SIXELSTATUS;
 }
-pub const imageFormat_FORMAT_GIF: imageFormat = 0;
-pub const imageFormat_FORMAT_PNG: imageFormat = 1;
-pub const imageFormat_FORMAT_BMP: imageFormat = 2;
-pub const imageFormat_FORMAT_JPG: imageFormat = 3;
-pub const imageFormat_FORMAT_TGA: imageFormat = 4;
-pub const imageFormat_FORMAT_WBMP: imageFormat = 5;
-pub const imageFormat_FORMAT_TIFF: imageFormat = 6;
-pub const imageFormat_FORMAT_SIXEL: imageFormat = 7;
-pub const imageFormat_FORMAT_PNM: imageFormat = 8;
-pub const imageFormat_FORMAT_GD2: imageFormat = 9;
-pub const imageFormat_FORMAT_PSD: imageFormat = 10;
-pub const imageFormat_FORMAT_HDR: imageFormat = 11;
-pub type imageFormat = ::std::os::raw::c_uint;
-pub const loopControl_LOOP_AUTO: loopControl = 0;
-pub const loopControl_LOOP_FORCE: loopControl = 1;
-pub const loopControl_LOOP_DISABLE: loopControl = 2;
-pub type loopControl = ::std::os::raw::c_uint;
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum imageFormat {
+    FORMAT_GIF = 0,
+    FORMAT_PNG = 1,
+    FORMAT_BMP = 2,
+    FORMAT_JPG = 3,
+    FORMAT_TGA = 4,
+    FORMAT_WBMP = 5,
+    FORMAT_TIFF = 6,
+    FORMAT_SIXEL = 7,
+    FORMAT_PNM = 8,
+    FORMAT_GD2 = 9,
+    FORMAT_PSD = 10,
+    FORMAT_HDR = 11,
+}
+#[repr(u32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum loopControl {
+    LOOP_AUTO = 0,
+    LOOP_FORCE = 1,
+    LOOP_DISABLE = 2,
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct sixel_frame {
