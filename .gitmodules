@@ -1,0 +1,9 @@
+[submodule "libsixel"]
+	path = libsixel
+	url = git@github.com:saitoha/libsixel.git
+[submodule "libjpeg-turbo"]
+	path = libjpeg-turbo
+	url = git@github.com:libjpeg-turbo/libjpeg-turbo.git
+[submodule "libpng"]
+	path = libpng
+	url = git@github.com:glennrp/libpng.git
