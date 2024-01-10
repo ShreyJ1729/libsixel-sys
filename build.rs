@@ -24,7 +24,7 @@ fn main() {
     let mut bindings = bindgen::Builder::default().header("libsixel/include/sixel.h");
 
     // iterate over sixel.h and add all enum names to the builder
-    for line in include_str!("libsixel/include/sixel.h").lines() {
+    for line in include_str!("libsixel/include/sixel.h.in").lines() {
         let trimmed = line.trim().split_whitespace().collect::<Vec<_>>();
         if trimmed.len() < 2 {
             continue;
@@ -37,12 +37,12 @@ fn main() {
             println!("added enum {}", trimmed[2]);
         }
     }
-    // Create bindings and write to src/generated_bindings.rs
-    let out_path = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap());
+    // Create bindings and write to OUT_DIR/bindings.rs
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .generate()
         .expect("Unable to generate bindings")
-        .write_to_file(out_path.join("src/generated_bindings.rs"))
+        .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
 
     // 3. Compile and link the C libraries
